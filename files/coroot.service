@@ -1,4 +1,4 @@
-Unit]
+[Unit]
 Description=Coroot
 Documentation=https://coroot.com
 Wants=network-online.target
