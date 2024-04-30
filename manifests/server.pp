@@ -4,14 +4,14 @@
 #
 # @example
 #   include coroot::server
-class coroot::server (
+class coroot::server(
   String $listen_address   = '0.0.0.0:8080',
   String $bootstrap_clickhouse_address = 'clickhouse:9000',
   String $bootstrap_prometheus_url     = 'http://prometheus:9090/',
   String $bootstrap_refresh_interval   = '15s',
   Boolean $manage_package              = true,
   String $package_name                 = 'coroot',
-
+  String $clickhouse_database          = 'coroot',
 ){
 
   if $manage_package {
