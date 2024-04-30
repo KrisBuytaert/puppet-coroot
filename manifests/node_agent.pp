@@ -22,7 +22,7 @@ class coroot::node_agent (
     group   => 0,
     mode    => '0644',
     owner   => 0,
-    content => template('coroot/coroot-node-agentt.erb'),
+    content => template('coroot/coroot-node-agent.erb'),
   }
 
   service{'coroot-node-agent':
