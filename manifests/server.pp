@@ -35,16 +35,13 @@ class coroot::server(
     subscribe => File['/etc/sysconfig/coroot'],
   }
 
-  systemd::unit_file {'coroot.service':
-    content => template('coroot/coroot.service.erb'),
-  }
-
   if $disable_usage_statistics {
     notify {'disabled':  }
     $full_options = "$extra_options --disable-usage-statistics"
   }
 
-
-
+  systemd::unit_file {'coroot.service':
+    content => template('coroot/coroot.service.erb'),
+  }
 
 }
