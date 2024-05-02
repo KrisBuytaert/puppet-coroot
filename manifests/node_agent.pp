@@ -9,12 +9,16 @@ class coroot::node_agent (
   Boolean $manage_package              = true,
   String $package_name                 = 'coroot-node-agent',
   String $scrape_interval   = '15s',
+  Enum['present','absent']  $ensure_installed = present,
+  Enum['started','stopped'] $ensure_running   = started,
+
+
 
 ){
 
   if $manage_package {
     package {$package_name:
-      ensure => present,
+      ensure => $ensure_installed,
     }
   }
 
@@ -26,7 +30,7 @@ class coroot::node_agent (
   }
 
   service{'coroot-node-agent':
-    ensure    => 'running',
+    ensure    => $ensure_running,
     enable    => true,
     subscribe => File['/etc/sysconfig/coroot-node-agent'],
   }
