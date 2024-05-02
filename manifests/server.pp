@@ -13,6 +13,7 @@ class coroot::server(
   Boolean $manage_package              = true,
   String $package_name                 = 'coroot',
   String $clickhouse_database          = 'coroot',
+  String $extra_options                = '',
 ){
 
   if $manage_package {
@@ -37,6 +38,13 @@ class coroot::server(
   systemd::unit_file {'coroot.service':
     content => template('coroot/coroot.service.erb'),
   }
+
+  if $disable_usage_statistics {
+    notify {'disabled':  }
+    $extra_options = "$extra_options --disable-usage-statistics"
+  }
+
+
 
 
 }
