@@ -21,5 +21,5 @@ TasksMax=infinity
 TimeoutStartSec=0
 Restart=always
 RestartSec=5s
-ExecStart=/usr/bin/coroot --data-dir=/var/lib/coroot --disable-usage-statistics
+ExecStart=/usr/bin/coroot --data-dir=/var/lib/coroot <%= @extra_options %>
 
