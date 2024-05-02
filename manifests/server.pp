@@ -41,7 +41,7 @@ class coroot::server(
 
   if $disable_usage_statistics {
     notify {'disabled':  }
-    $extra_options = "$extra_options --disable-usage-statistics"
+    $full_options = "$extra_options --disable-usage-statistics"
   }
 
 
