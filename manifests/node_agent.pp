@@ -10,7 +10,7 @@ class coroot::node_agent (
   String $package_name                 = 'coroot-node-agent',
   String $scrape_interval   = '15s',
   Enum['present','absent']  $ensure_installed = present,
-  Enum['started','stopped'] $ensure_running   = started,
+  Enum['running','stopped'] $ensure_running   = running,
 
 
 
