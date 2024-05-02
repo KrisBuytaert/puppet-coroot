@@ -36,7 +36,6 @@ class coroot::server(
   }
 
   if $disable_usage_statistics {
-    notify {'disabled':  }
     $full_options = "$extra_options --disable-usage-statistics"
   }
 
