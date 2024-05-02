@@ -9,6 +9,7 @@ class coroot::server(
   String $bootstrap_clickhouse_address = 'clickhouse:9000',
   String $bootstrap_prometheus_url     = 'http://prometheus:9090/',
   String $bootstrap_refresh_interval   = '15s',
+  Boolean $disable_usage_statistics    = false,
   Boolean $manage_package              = true,
   String $package_name                 = 'coroot',
   String $clickhouse_database          = 'coroot',
@@ -34,7 +35,7 @@ class coroot::server(
   }
 
   systemd::unit_file {'coroot.service':
-    source => "puppet:///modules/${module_name}/coroot.service"
+    content => template('coroot/coroot.service.erb'),
   }
 
 
