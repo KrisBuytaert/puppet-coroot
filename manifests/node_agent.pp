@@ -6,12 +6,12 @@
 #   include coroot::server
 class coroot::node_agent (
   String $coroot_address   = 'coroot:8080',
-  Boolean $manage_package              = true,
+  Boolean $manage_package              = true,  # Assuming a package / rpm / deb is in the configured repository and can be installed
   String $package_name                 = 'coroot-node-agent',
   String $scrape_interval   = '15s',
   Enum['present','absent']  $ensure_installed = present,
   Enum['running','stopped'] $ensure_running   = running,
-
+  String $api_key  = '',
 
 
 ){
