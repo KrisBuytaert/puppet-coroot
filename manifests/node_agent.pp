@@ -19,6 +19,7 @@ class coroot::node_agent (
   if $manage_package {
     package {$package_name:
       ensure => $ensure_installed,
+      before => Service['coroot-node-agent'],
     }
   }
 
