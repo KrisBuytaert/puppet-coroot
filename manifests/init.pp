@@ -1,8 +1,17 @@
-# @summary A short summary of the purpose of this class
-#
-# A description of what this class does
+# @summary the main coroott class
 #
 # @example
 #   include coroot
-class coroot {
+class coroot(
+  Boolean $enable_agent = false,
+  Boolean $enable_server = false,
+)
+{
+  if $enable_agent {
+    include ::coroot::node_agent
+  }
+
+  if $enable_server {
+    include ::coroot::server
+  }
 }
