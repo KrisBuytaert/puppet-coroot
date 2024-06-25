@@ -43,6 +43,7 @@ class coroot::node_agent (
     mode    => '0644',
     owner   => 0,
     content => template('coroot/coroot-node-agent.erb'),
+    before => Service['coroot-node-agent'],
   }
 
   service{'coroot-node-agent':
@@ -52,7 +53,8 @@ class coroot::node_agent (
   }
 
   systemd::unit_file {'coroot-node-agent.service':
-    source => "puppet:///modules/${module_name}/coroot-node-agent.service"
+    source => "puppet:///modules/${module_name}/coroot-node-agent.service",
+    before => Service['coroot-node-agent'],
   }
 
 
