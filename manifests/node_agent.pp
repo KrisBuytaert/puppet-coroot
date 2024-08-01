@@ -43,6 +43,7 @@ class coroot::node_agent (
     mode    => '0644',
     owner   => 0,
     content => template('coroot/coroot-node-agent.erb'),
+    before => Service['coroot-node-agent'],
   }
 
   service{'coroot-node-agent':
