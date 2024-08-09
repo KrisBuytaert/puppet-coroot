@@ -1,11 +1,10 @@
 # coroot
 
-This module installs and manages coroot, 
+This module installs and manages coroot,
 
 https://github.com/coroot/
 
 both the server and the coroot-node-agent 
-
 
 
 
