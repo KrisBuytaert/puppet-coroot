@@ -26,13 +26,23 @@ class coroot::server(
   # This only sets the parameters at bootstrap, additional config is still from 
   # the UI.
   String $bootstrap_clickhouse_address = 'clickhouse:9000',
+  #Optional[String] $bootstrap_clickhouse_user    = undef,
+  #Optional[String] $bootstrap_clickhouse_password    = undef,
+  #Optional[String] $bootstrap_clickhouse_database    = undef,
   String $bootstrap_prometheus_url     = 'http://prometheus:9090/',
+  #Optional[String] $bootstrap_prometheus_extra_slector     = undef,
   String $bootstrap_refresh_interval   = '15s',
+  Optional[String] $pgsql_connection   = '',
   Boolean $disable_usage_statistics    = false,
+  #Boolean $disable_slo    = false,
+  #Boolean $disable_deployments    = false,
+  #Boolean $disable_check_for_updates    = false,
   Boolean $manage_package              = true,
   String $package_name                 = 'coroot',
   String $clickhouse_database          = 'coroot',
   String $extra_options                = '',
+  String $_pgsql_options  = '',
+  String $_stat_options   = '',
 ){
 
   if $manage_package {
@@ -55,8 +65,13 @@ class coroot::server(
   }
 
   if $disable_usage_statistics {
-    $full_options = "${extra_options} --disable-usage-statistics"
+    $_stat_options = "${extra_options} --disable-usage-statistics"
   }
+  if  $pgsql_connection  !=  '' {
+    $_pgsql_options = "--pg-connection-string=\"${pgsql_connection}\""
+  }
+
+  $full_options = "${_stat_options} ${_pgsql_options}"
 
   systemd::unit_file {'coroot.service':
     content => template('coroot/coroot.service.erb'),
