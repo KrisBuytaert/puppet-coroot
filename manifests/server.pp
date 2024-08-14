@@ -41,8 +41,6 @@ class coroot::server(
   String $package_name                 = 'coroot',
   String $clickhouse_database          = 'coroot',
   String $extra_options                = '',
-  String $_pgsql_options  = '',
-  String $_stat_options   = '',
 ){
 
   if $manage_package {
