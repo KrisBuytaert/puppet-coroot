@@ -26,17 +26,17 @@ class coroot::server(
   # This only sets the parameters at bootstrap, additional config is still from 
   # the UI.
   String $bootstrap_clickhouse_address = 'clickhouse:9000',
-  #Optional[String] $bootstrap_clickhouse_user    = undef,
-  #Optional[String] $bootstrap_clickhouse_password    = undef,
-  #Optional[String] $bootstrap_clickhouse_database    = undef,
+  Optional[String] $bootstrap_clickhouse_user    = undef,
+  Optional[String] $bootstrap_clickhouse_password    = undef,
+  Optional[String] $bootstrap_clickhouse_database    = undef,
   String $bootstrap_prometheus_url     = 'http://prometheus:9090/',
-  #Optional[String] $bootstrap_prometheus_extra_slector     = undef,
+  Optional[String] $bootstrap_prometheus_extra_slector     = undef,
   String $bootstrap_refresh_interval   = '15s',
   Optional[String] $pgsql_connection   = '',
   Boolean $disable_usage_statistics    = false,
-  #Boolean $disable_slo    = false,
-  #Boolean $disable_deployments    = false,
-  #Boolean $disable_check_for_updates    = false,
+  Boolean $disable_slo    = false,
+  Boolean $disable_deployments    = false,
+  Boolean $disable_check_for_updates    = false,
   Boolean $manage_package              = true,
   String $package_name                 = 'coroot',
   String $clickhouse_database          = 'coroot',
@@ -62,6 +62,19 @@ class coroot::server(
     subscribe => File['/etc/sysconfig/coroot'],
   }
 
+
+  if $disable_slo {
+    $_slo_options = ' --do-not-check-slo '
+  }
+
+  if $disable_deployments {
+    $_deploy_options = ' --do-not-check-for-deployments '
+  }
+
+  if $disable_check_for_updates {
+    $_update_options = ' --do-not-check-for-updates '
+  }
+
   if $disable_usage_statistics {
     $_stat_options = "${extra_options} --disable-usage-statistics"
   }
@@ -69,7 +82,7 @@ class coroot::server(
     $_pgsql_options = "--pg-connection-string=\"${pgsql_connection}\""
   }
 
-  $full_options = "${_stat_options} ${_pgsql_options}"
+  $full_options = "${_stat_options} ${_pgsql_options} ${_slo_options} ${_deploy_options} ${_update_options} "
 
   systemd::unit_file {'coroot.service':
     content => template('coroot/coroot.service.erb'),
