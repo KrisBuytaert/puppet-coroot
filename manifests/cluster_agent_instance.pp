@@ -31,7 +31,7 @@ define coroot::cluster_agent_instance (
 ){
 
 
-  file { "/etc/sysconfig/coroot-cluster-agent@${project}":
+  file { "/etc/sysconfig/coroot-cluster-agent-${project}":
     group   => 0,
     mode    => '0644',
     owner   => 0,
