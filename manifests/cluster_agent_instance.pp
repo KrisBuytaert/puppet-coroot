@@ -42,7 +42,7 @@ define coroot::cluster_agent_instance (
   service{"coroot-cluster-agent@${project}":
     ensure    => $ensure_running,
     enable    => true,
-    subscribe => File["/etc/sysconfig/coroot-cluster-agent@${project}"],
+    subscribe => File["/etc/sysconfig/coroot-cluster-agent-${project}"],
   }
 
   systemd::unit_file {"coroot-cluster-agent@${project}.service":
