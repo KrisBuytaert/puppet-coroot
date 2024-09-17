@@ -20,11 +20,12 @@
 
 
 define coroot::cluster_agent_instance (
-  String $coroot_address                      = 'coroot:8080',
+  String $coroot_address                      = "http://coroot.${domain}/",
   String $scrape_interval                     = '60s',
   Enum['running','stopped'] $ensure_running   = running,
   String $api_key                             = 'default',
   String $project                             = 'default',
+  String $listen_url                          = '127.0.0.1:10301',
 
 
 ){
