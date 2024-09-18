@@ -34,4 +34,13 @@ class  coroot::cluster_agent (
   }
 
 
+  file { '/var/lib/coroot/wal':
+    ensure   => 'directory',
+    group    => 0,
+    mode     => '0755',
+    owner    => 0,
+  }
+
+
+
 }
