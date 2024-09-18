@@ -51,4 +51,16 @@ define coroot::cluster_agent_instance (
   }
 
 
+
+  file { "/var/lib/coroot/wal/${api_key}":
+    ensure   => 'directory',
+    group    => 0,
+    mode     => '0755',
+    owner    => 0,
+  }
+
+
+
+
+
 }
