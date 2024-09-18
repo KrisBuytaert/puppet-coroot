@@ -41,12 +41,17 @@ class coroot::server(
   String $package_name                 = 'coroot',
   String $clickhouse_database          = 'coroot',
   String $extra_options                = '',
+  Boolean $enable_cluster_agent        = false,
 ){
 
   if $manage_package {
     package {$package_name:
       ensure => present,
     }
+  }
+
+  if $enable_cluster_agent {
+    include  coroot::cluster_agent
   }
 
   file { '/etc/sysconfig/coroot':
