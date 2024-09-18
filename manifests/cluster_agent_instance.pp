@@ -46,7 +46,7 @@ define coroot::cluster_agent_instance (
   }
 
   systemd::unit_file {"coroot-cluster-agent@${project}.service":
-    content => template ('coroot/coroot-cluster-agent-service.erb'),
+    content => template ('coroot/coroot-cluster-agent.service.erb'),
     before => Service["coroot-cluster-agent@${project}"],
   }
 
