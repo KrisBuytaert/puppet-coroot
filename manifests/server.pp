@@ -30,18 +30,28 @@ class coroot::server(
   Optional[String] $bootstrap_clickhouse_password    = undef,
   Optional[String] $bootstrap_clickhouse_database    = undef,
   String $bootstrap_prometheus_url     = 'http://prometheus:9090/',
+  Optional[String] $bootstrap_prometheus_extra_slector     = undef,
   String $bootstrap_refresh_interval   = '15s',
+  Optional[String] $pgsql_connection   = '',
   Boolean $disable_usage_statistics    = false,
+  Boolean $disable_slo    = false,
+  Boolean $disable_deployments    = false,
+  Boolean $disable_check_for_updates    = false,
   Boolean $manage_package              = true,
   String $package_name                 = 'coroot',
   String $clickhouse_database          = 'coroot',
   String $extra_options                = '',
+  Boolean $enable_cluster_agent        = false,
 ){
 
   if $manage_package {
     package {$package_name:
       ensure => present,
     }
+  }
+
+  if $enable_cluster_agent {
+    include  coroot::cluster_agent
   }
 
   file { '/etc/sysconfig/coroot':
@@ -57,9 +67,27 @@ class coroot::server(
     subscribe => File['/etc/sysconfig/coroot'],
   }
 
-  if $disable_usage_statistics {
-    $full_options = "${extra_options} --disable-usage-statistics"
+
+  if $disable_slo {
+    $_slo_options = ' --do-not-check-slo '
   }
+
+  if $disable_deployments {
+    $_deploy_options = ' --do-not-check-for-deployments '
+  }
+
+  if $disable_check_for_updates {
+    $_update_options = ' --do-not-check-for-updates '
+  }
+
+  if $disable_usage_statistics {
+    $_stat_options = "${extra_options} --disable-usage-statistics"
+  }
+  if  $pgsql_connection  !=  '' {
+    $_pgsql_options = "--pg-connection-string=\"${pgsql_connection}\""
+  }
+
+  $full_options = "${_stat_options} ${_pgsql_options} ${_slo_options} ${_deploy_options} ${_update_options} "
 
   systemd::unit_file {'coroot.service':
     content => template('coroot/coroot.service.erb'),
