@@ -26,6 +26,9 @@ class coroot::server(
   # This only sets the parameters at bootstrap, additional config is still from 
   # the UI.
   String $bootstrap_clickhouse_address = 'clickhouse:9000',
+  Optional[String] $bootstrap_clickhouse_user    = undef,
+  Optional[String] $bootstrap_clickhouse_password    = undef,
+  Optional[String] $bootstrap_clickhouse_database    = undef,
   String $bootstrap_prometheus_url     = 'http://prometheus:9090/',
   String $bootstrap_refresh_interval   = '15s',
   Boolean $disable_usage_statistics    = false,
