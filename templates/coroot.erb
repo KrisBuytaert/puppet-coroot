@@ -8,6 +8,9 @@ LISTEN="<%= @listen_address %>"
 <%- if @enable_global -%>
 GLOBAL_CLICKHOUSE_ADDRESS="<%= @bootstrap_clickhouse_address %>"
 GLOBAL_PROMETHEUS_URL="<%= @bootstrap_prometheus_url %>"
+GLOBAL_CLICKHOUSE_USER="<%= @bootstrap_clickhouse_user %>"
+GLOBAL_CLICKHOUSE_PASSWORD="<%= @bootstrap_clickhouse_password %>"
+GLOBAL_CLICKHOUSE_INITIAL_DATABASE="<%= @bootstrap_clickhouse_database %>"
 <%- end -%>
 
 
