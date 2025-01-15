@@ -30,6 +30,8 @@ class coroot::server(
   Optional[String] $bootstrap_clickhouse_password    = undef,
   Optional[String] $bootstrap_clickhouse_database    = undef,
   String $bootstrap_prometheus_url     = 'http://prometheus:9090/',
+  # By default enable global use of the given clickhouse and prom instances
+  Boolean $enable_global               = true,
   Optional[String] $bootstrap_prometheus_extra_slector     = undef,
   String $bootstrap_refresh_interval   = '15s',
   Optional[String] $pgsql_connection   = '',

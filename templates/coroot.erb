@@ -5,6 +5,10 @@ BOOTSTRAP_CLICKHOUSE_PASSWORD="<%= @bootstrap_clickhouse_password %>"
 BOOTSTRAP_PROMETHEUS_URL="<%= @bootstrap_prometheus_url %>"
 BOOTSTRAP_REFRESH_INTERVAL="<%= @bootstrap_refresh_interval %>"
 LISTEN="<%= @listen_address %>"
+<%- if @enable_global -%>
+GLOBAL_CLICKHOUSE_ADDRESS="<%= @bootstrap_clickhouse_address %>"
+GLOBAL_PROMETHEUS_URL="<%= @bootstrap_prometheus_url %>"
+<%- end -%>
 
 
 
