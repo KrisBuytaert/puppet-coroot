@@ -1,10 +1,13 @@
 # coroot
 
+This module is a work in progress and has mostly been tested on AlmaLinux ..
+
 This module installs and manages coroot,
+both the server and the coroot-node-agent  and the cluster agent. 
+As of 1.7.1 we by default enable the global configuration for Clickhouse and Prometheus  ($enable_global)
 
 https://github.com/coroot/
 
-both the server and the coroot-node-agent 
 
 
 
@@ -16,6 +19,7 @@ Install the server
       bootstrap_prometheus_url     => 'http://prometheus.yourdomain:9090/,
       bootstrap_refresh_interval   => 15s,
       manage_package               => true,
+      enable_global                => true,
       package_name                 => 'coroot',
       disable_usage_statistics     => true,
       clickhouse_database          => 'default',
