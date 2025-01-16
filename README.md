@@ -1,6 +1,7 @@
 # coroot
 
 This module is a work in progress and has mostly been tested on AlmaLinux ..
+Do note that not all parameters are supported yet. 
 
 This module installs and manages coroot,
 both the server and the coroot-node-agent  and the cluster agent. 
